@@ -11,6 +11,9 @@ if (!userArgs[0].startsWith('mongodb')) {
 }
 */
 var async = require('async')
+var Film = require('./models/film')
+var Hall = require('./models/hall')
+var Session = require('./models/session')
 var Book = require('./models/book')
 var Author = require('./models/author')
 var Genre = require('./models/genre')
@@ -28,6 +31,54 @@ var authors = []
 var genres = []
 var books = []
 var bookinstances = []
+var films = []
+var halls = []
+var sessions = []
+
+function filmsCreate(name, duration) {
+  var film = new Film(name, duration);
+       
+  film.save(function (err) {
+    if (err) {
+      cb(err, null)
+      return
+    }
+    console.log('New Film: ' + film);
+    films.push(film)
+    cb(null, film)
+  }  );
+}
+
+function hallsCreate(seatsAmount) {
+  var hall = new Hall(seatsAmount);
+       
+  hall.save(function (err) {
+    if (err) {
+      cb(err, null)
+      return
+    }
+    console.log('New Hall: ' + hall);
+    halls.push(hall)
+    cb(null, hall)
+  }  );
+}
+
+
+  function sessionsCreate(film, hall, sessionDate, reservedSeats, price, cb) {
+    var session = new Session(film, hall, sessionDate, reservedSeats, price);    
+    session.save(function (err) {
+      if (err) {
+        console.log('ERROR CREATING session: ' + session);
+        cb(err, null)
+        return
+      }
+      console.log('New Session: ' + session);
+      sessions.push(session)
+      cb(null, session)
+    }  );
+  }
+
+
 
 function authorCreate(first_name, family_name, d_birth, d_death, cb) {
   authordetail = {first_name:first_name , family_name: family_name }
@@ -206,12 +257,20 @@ function createBookInstances(cb) {
         cb);
 }
 
+function createFilms(cb) {
+  async.parallel([
+    function(callback) {
+      filmsCreate("Гарри Поттер и Философский камень", 120 )
+    }]) 
+}
+
 
 
 async.series([
     createGenreAuthors,
     createBooks,
-    createBookInstances
+    createBookInstances,
+    createFilms
 ],
 // Optional callback
 function(err, results) {
