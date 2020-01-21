@@ -10,7 +10,8 @@ var Schema = mongoose.Schema;
 // });
 
 var HallSchema = new Schema({
-  seats: {type: number}    
+  name: {type: String},
+  seats: {type: Number}    
 });
 
 module.exports = mongoose.model('Hall', HallSchema);

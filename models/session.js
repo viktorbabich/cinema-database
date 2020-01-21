@@ -7,8 +7,8 @@ var SessionSchema = new Schema({
     film: { type: Schema.ObjectId, ref: 'Film', required: true },
     hall: { type: Schema.ObjectId, ref: 'Hall', required: true },
     sessionDate: { type: Date, required: true },
-    reservedSeats: [{type: number}],
-    price: {type: number}
+    reservedSeats: [{type: Number}],
+    price: {type: Number}
 });
 
 
