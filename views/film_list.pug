@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+  
+  ul
+    each film in film_list
+      li 
+        div
+          a(href=film.url) #{film.name}
+    else
+      li There are no books.

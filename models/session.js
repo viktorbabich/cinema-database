@@ -3,6 +3,9 @@ var moment = require('moment');
 
 var Schema = mongoose.Schema;
 
+var Film = require('../models/film')
+var Hall = require('../models/hall')
+
 var SessionSchema = new Schema({
     film: { type: Schema.ObjectId, ref: 'Film', required: true },
     hall: { type: Schema.ObjectId, ref: 'Hall', required: true },

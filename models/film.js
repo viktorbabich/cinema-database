@@ -8,4 +8,10 @@ var FilmSchema = new Schema({
   duration: { type: Number }
 });
 
+FilmSchema
+.virtual('url')
+.get(function () {
+  return '/catalog/film_sessions/'+this._id;
+});
+
 module.exports = mongoose.model('Film', FilmSchema);

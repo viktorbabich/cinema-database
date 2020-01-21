@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  
+  ul
+    each session in session_filtered_list
+      li 
+        div
+          #{session.price}
+        div
+          #{session.hall.name}
+        div
+          #{session.film.name}
+        div
+          #{session.film.duration}
+    else
+      li There are no books.

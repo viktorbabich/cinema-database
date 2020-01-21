@@ -9,6 +9,11 @@ var genre_controller = require('../controllers/genreController');
 var book_instance_controller = require('../controllers/bookinstanceController');
 
 
+var film_controller = require('../controllers/filmController'); 
+var session_controller = require('../controllers/sessionController'); 
+
+
+
 /// BOOK ROUTES ///
 
 // GET catalog home page.
@@ -36,7 +41,10 @@ router.post('/book/:id/update', book_controller.book_update_post);
 router.get('/book/:id', book_controller.book_detail);
 
 // GET request for list of all Book.
-router.get('/books', book_controller.book_list);
+// router.get('/books', book_controller.book_list);
+
+
+
 
 /// AUTHOR ROUTES ///
 
@@ -117,6 +125,12 @@ router.get('/bookinstance/:id', book_instance_controller.bookinstance_detail);
 
 // GET request for list of all BookInstance.
 router.get('/bookinstances', book_instance_controller.bookinstance_list);
+
+
+router.get('/books', film_controller.film_list);
+
+router.get('/film_sessions/:id', session_controller.session_filtered_list);
+
 
 
 module.exports = router;

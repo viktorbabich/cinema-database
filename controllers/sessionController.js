@@ -1,5 +1,6 @@
 var BookInstance = require('../models/bookinstance')
 var Book = require('../models/book')
+var Session = require('../models/Session')
 var async = require('async')
 
 const { body,validationResult } = require('express-validator/check');
@@ -7,15 +8,33 @@ const { sanitizeBody } = require('express-validator/filter');
 
 // Display list of all Sessions.
 exports.session_list = function(req, res, next) {
-
-  Session.find()
-    .populate('book')
+  Session.find({})
+    .populate('film')
     .exec(function (err, list_sessions) {
       if (err) { return next(err); }
-      res.render('bookinstance_list', { title: 'Session List', session_list:  list_sessions});
+      res.render('session_list', { title: 'Session List', session_list: list_sessions});
     })
-
 };
+
+
+exports.session_filtered_list = function(req, res, next) {
+    console.log(req)
+    Session.find()
+      .populate(["hall", {
+            path: 'film', 
+            match: {
+                _id: req.params.id
+            }
+        }])
+      .exec(function (err, list_filtered_sessions) {
+        if (err) { return next(err); }
+        const filtered_list = list_filtered_sessions.filter(function(session) {
+            return session.film && session.film._id;
+        })
+        res.render('session_filtered_list', { title: 'Session List', session_filtered_list: filtered_list});
+      })
+  };
+
 
 // Display detail page for a specific BookInstance.
 exports.bookinstance_detail = function(req, res, next) {
