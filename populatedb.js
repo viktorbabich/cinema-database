@@ -110,7 +110,13 @@ function createSessions(cb) {
       sessionsCreate(films[1], halls[1], new Date(), [], 150, callback)
     },
     function(callback) {
-      sessionsCreate(films[2], halls[2], new Date(), [], 130, callback)
+      sessionsCreate(films[2], halls[0], new Date(), [], 900, callback)
+    },
+    function(callback) {
+      sessionsCreate(films[2], halls[1], new Date(), [], 100, callback)
+    },
+    function(callback) {
+      sessionsCreate(films[2], halls[2], new Date(), [], 1310, callback)
     },
   ], cb) 
 }

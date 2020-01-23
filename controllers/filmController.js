@@ -13,7 +13,8 @@ exports.film_list = function(req, res, next) {
       if (err) {return next(err)} 
       else {
             // Successful, so render
-            res.render('film_list', { title: 'Film List', film_list:  list_films});
+            // res.render('film_list', { title: 'Film List', film_list:  list_films});
+            res.json({film_list:  list_films})
         }
     });
 

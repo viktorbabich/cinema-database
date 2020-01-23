@@ -129,6 +129,10 @@ router.get('/bookinstances', book_instance_controller.bookinstance_list);
 
 router.get('/books', film_controller.film_list);
 
+router.get('/session_detail/:id', session_controller.session_detail);
+
+router.post('/session_update', session_controller.session_update);
+
 router.get('/films', film_controller.film_list);
 
 router.get('/film_sessions/:id', session_controller.session_filtered_list);
